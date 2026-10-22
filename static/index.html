@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="km">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#08111f">
+<title>China Video Downloader Pro</title>
+<style>
+:root{color-scheme:dark;--bg:#08111f;--panel:#111d30;--line:#263951;--cyan:#22d3ee;--amber:#fbbf24;--muted:#9fb0c7}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#122b43 0,#08111f 58%);color:#f7fbff;font-family:system-ui,-apple-system,"Noto Sans Khmer",sans-serif;min-height:100vh}
+main{max-width:760px;margin:auto;padding:28px 16px 44px}.brand{display:flex;align-items:center;gap:12px;margin:10px 0 28px}.logo{display:grid;place-items:center;width:48px;height:48px;border-radius:15px;background:linear-gradient(135deg,var(--cyan),#2563eb);color:#04101c;font-size:25px;font-weight:900}.brand h1{font-size:20px;margin:0}.brand p{font-size:12px;color:var(--muted);margin:4px 0 0}
+.hero{margin:20px 0 24px}.eyebrow{color:var(--cyan);font-size:12px;letter-spacing:2px;font-weight:800}.hero h2{font-size:clamp(29px,7vw,43px);line-height:1.2;margin:10px 0}.hero p{color:var(--muted);line-height:1.7;margin:0}
+.panel{background:rgba(17,29,48,.94);border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:0 18px 55px #0003}.label{display:block;font-weight:700;margin-bottom:10px}.inputrow{display:flex;gap:9px}.url{width:100%;min-width:0;background:#08111f;border:1px solid #30445e;border-radius:12px;padding:15px;color:white;font-size:15px;outline:none}.url:focus{border-color:var(--cyan)}button{border:0;border-radius:12px;padding:14px 17px;font-weight:800;cursor:pointer;font-size:14px}.paste{background:#22344b;color:white;white-space:nowrap}.primary{width:100%;background:linear-gradient(90deg,var(--cyan),#60a5fa);color:#06121e;margin-top:12px}.secondary{width:100%;background:#22344b;color:white;margin-top:10px}.platforms{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:17px}.platform{border:1px solid var(--line);border-radius:12px;padding:12px 5px;text-align:center;color:#dbeafe;font-size:12px}.platform b{display:block;font-size:19px;margin-bottom:5px;color:var(--cyan)}.status{display:none;margin-top:16px;padding:14px;border:1px solid var(--line);border-radius:12px;line-height:1.6;overflow-wrap:anywhere}.status.show{display:block}.status.error{border-color:#7f1d1d;color:#fecaca}.status.ok{border-color:#155e75}.meta{display:flex;gap:12px;align-items:flex-start;margin-top:12px}.meta img{width:100px;height:65px;object-fit:cover;border-radius:9px;background:#07101d}.meta strong{display:block}.meta small{color:var(--muted)}.notice{color:var(--muted);font-size:12px;line-height:1.7;margin-top:16px}.footer{text-align:center;color:#71839c;font-size:12px;margin-top:22px}
+@media(max-width:520px){main{padding:20px 13px 35px}.panel{padding:15px}.inputrow{flex-direction:column}.paste{width:100%}.platforms{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body><main>
+<header class="brand"><div class="logo">↓</div><div><h1>China Video Downloader <span style="color:#22d3ee">Pro</span></h1><p>Simple • Fast • Mobile-ready</p></div></header>
+<section class="hero"><div class="eyebrow">VIDEO TOOLKIT</div><h2>Download videos<br>from Chinese platforms.</h2><p>បិទភ្ជាប់ Link វីដេអូសាធារណៈ ដើម្បីពិនិត្យព័ត៌មាន និងទាញយកគុណភាពខ្ពស់បំផុតដែលប្រភពអនុញ្ញាត។</p></section>
+<section class="panel">
+<label class="label" for="url">Video URL / តំណវីដេអូ</label>
+<div class="inputrow"><input id="url" class="url" type="url" placeholder="https://..." autocomplete="url"><button class="paste" id="paste">Paste Link</button></div>
+<button class="primary" id="check">① ពិនិត្យវីដេអូ</button>
+<button class="secondary" id="download" disabled>↓ Download Video</button>
+<div id="status" class="status" role="status" aria-live="polite"></div>
+<div class="platforms">
+<div class="platform"><b>抖音</b>Douyin</div><div class="platform"><b>快手</b>Kuaishou</div><div class="platform"><b>哔哩</b>Bilibili</div><div class="platform"><b>小红书</b>Xiaohongshu</div>
+</div>
+<p class="notice">ប្រើតែវីដេអូដែលអ្នកមានសិទ្ធិទាញយក ឬប្រើប្រាស់។ ឧបករណ៍នេះមិនប្រើគណនី/cookies និងមិនរំលង DRM, login ឬការការពារវេទិកាទេ។ វីដេអូ private ឬ link ដែលវេទិការារាំង អាចមិនដំណើរការ។</p>
+</section>
+<div class="footer">China Video Downloader Pro • Respect creators and platform rules</div>
+</main>
+<script>
+const urlInput=document.getElementById('url'), statusBox=document.getElementById('status'), checkBtn=document.getElementById('check'), downloadBtn=document.getElementById('download');
+let checkedUrl='';
+function status(message,type=''){statusBox.className='status show '+type;statusBox.textContent=message}
+document.getElementById('paste').onclick=async()=>{try{urlInput.value=await navigator.clipboard.readText();status('បានបិទភ្ជាប់ Link។ ចុច “ពិនិត្យវីដេអូ” ដើម្បីបន្ត។','ok')}catch(e){urlInput.focus();status('Browser មិនអនុញ្ញាត Clipboard ទេ។ សូមចុចប្រអប់ ហើយ Paste ដោយដៃ។')}};
+checkBtn.onclick=async()=>{const url=urlInput.value.trim();if(!url){status('សូមបញ្ចូល Link វីដេអូជាមុន។','error');return}
+checkBtn.disabled=true;downloadBtn.disabled=true;checkedUrl='';status('កំពុងពិនិត្យ Link...');try{const r=await fetch('/api/info',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url})});const data=await r.json();if(!r.ok)throw Error(data.detail||'មិនអាចពិនិត្យ Link បានទេ');checkedUrl=url;let html=document.createElement('div');html.innerHTML='';statusBox.className='status show ok';statusBox.replaceChildren();const title=document.createElement('strong');title.textContent=data.title||'Video';statusBox.appendChild(title);const info=document.createElement('div');info.textContent=[data.uploader,data.duration?Math.floor(data.duration/60)+' min':'',data.platform].filter(Boolean).join(' • ');statusBox.appendChild(info);const note=document.createElement('small');note.textContent='អាចទាញយកបាន ប្រសិនបើវេទិកាអនុញ្ញាត និងវីដេអូសាធារណៈ។';statusBox.appendChild(note);downloadBtn.disabled=false}catch(e){status(e.message,'error')}finally{checkBtn.disabled=false}};
+downloadBtn.onclick=async()=>{if(!checkedUrl)return;downloadBtn.disabled=true;status('កំពុងរៀបចំវីដេអូ។ សូមរង់ចាំ...');try{const r=await fetch('/api/download',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:checkedUrl})});if(!r.ok){let d={};try{d=await r.json()}catch{}throw Error(d.detail||'ទាញយកមិនបាន');}const blob=await r.blob();const cd=r.headers.get('Content-Disposition')||'';const match=cd.match(/filename="?([^"]+)"?/i);const name=match?match[1]:'video.mp4';const a=document.createElement('a');const obj=URL.createObjectURL(blob);a.href=obj;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(obj),60000);status('បានចាប់ផ្ដើម Download។ ពិនិត្យ Downloads នៅលើទូរស័ព្ទ។','ok')}catch(e){status(e.message,'error')}finally{downloadBtn.disabled=false}};
+</script></body></html>
+
